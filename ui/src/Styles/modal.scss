@@ -1,0 +1,169 @@
+@import "./variables.scss";
+
+.show {
+  background-color: #0000007d;
+}
+
+.somodal1.somodal_max .somodal1__dialog {
+  margin: 0;
+  max-width: 100%;
+}
+
+.somodal1__content {
+  background: $color-shark;
+  border: 1px solid $color-vulcan;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 19px rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  outline: 0;
+}
+
+.somodal1__title {
+  font-weight: $font-weight-normal;
+  font-size: $font-size-md;
+  margin-bottom: 0;
+  padding: 13px 15px;
+}
+.somodal1__title span {
+  margin-left: 7px;
+}
+
+.somodal1__header {
+  border-bottom: 1px solid $color-vulcan;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.somodal1__close {
+  font-weight: $font-weight-normal;
+  font-size: 24px;
+  text-align: center;
+  color: $color-bitter-sweet;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  padding: 10px 15px;
+  border-left: 1px solid $color-vulcan;
+}
+
+.somodal1__maximize {
+  font-weight: normal;
+  font-size: 24px;
+  text-align: center;
+  color: $color-dodger-blue;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  padding: 10px 15px;
+  border-left: 1px solid $color-vulcan;
+  position: absolute;
+  right: 46px;
+}
+
+.somodal1__body {
+  padding: 15px;
+  position: relative;
+  flex: 1 1 auto;
+}
+
+.somodal1__label {
+  font-weight: $font-weight-normal;
+  font-size: $font-size-s;
+  margin-bottom: 10px;
+}
+
+.somodal1__footer {
+  background: $color-vulcan;
+  border-radius: 0px 0px 6px 6px;
+  height: 17px;
+  position: relative;
+}
+
+.somodal1__dots {
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.somodal1__dot {
+  background: 0 0;
+  color: inherit;
+  border: none;
+  padding: 0;
+  display: inline-block;
+}
+.somodal1__dot:hover span,
+.somodal1__dot.active span {
+  background-color: $color-dodger-blue;
+}
+.somodal1__dot span {
+  width: 5px;
+  height: 5px;
+  margin: 6px 5px;
+  background: $color-french-gray;
+  display: block;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  transition: opacity 0.2s ease;
+  border-radius: 100%;
+}
+
+.somodal1__dialog {
+  position: relative;
+  width: auto;
+  margin: 0.5rem;
+  pointer-events: none;
+}
+@media (min-width: 992px) {
+  .somodal1__dialog {
+    max-width: 800px !important;
+    margin: 1.75rem auto;
+  }
+}
+@media (min-width: 576px) {
+  .somodal1__dialog.somodal1__dialog--modal-sm {
+    max-width: 475px !important;
+    margin: 1.75rem auto;
+  }
+}
+
+.somodal1__menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  padding: 15px;
+  text-align: left;
+}
+
+.somodal1__menu > li > a {
+  font-size: $font-size-s;
+  color: $color-primary-text-color;
+  padding: 15px 15px 15px 0;
+}
+.somodal1__menu > li > a:hover > svg,
+.somodal1__menu > li > a:active > svg,
+.somodal1__menu > li > a.active > svg {
+  color: $color-dodger-blue;
+}
+
+.somodal1__menu > li > a > svg {
+  color: $color-mind-gray;
+  margin-right: 7px;
+}
+
+.somodal1 .form-control {
+  background: $color-woodsmoke;
+  border-radius: 2px;
+  border: 0;
+  color: $color-mind-gray;
+  height: calc(1.5em + 0.75rem + 4px);
+}

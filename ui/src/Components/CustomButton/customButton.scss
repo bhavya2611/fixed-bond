@@ -1,0 +1,128 @@
+@import "../../Styles/variables.scss";
+
+.btn-dark1 {
+  color: $color-dodger-blue;
+  background-color: $color-vulcan;
+}
+
+.btn-dark1:hover,
+.btn-dark1:active,
+.btn-dark1:focus {
+  color: $color-dodger-blue;
+  background-color: $color-vulcan-darker;
+}
+
+.btn-basic {
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  padding: 10px;
+  outline: 0;
+  width: 100%;
+
+  &:disabled {
+    opacity: 0.5;
+    color: gray;
+    border-color: gray;
+    cursor: not-allowed !important;
+    background-color: unset;
+
+    &:hover {
+      background-color: unset;
+      color: unset;
+      color: gray;
+    }
+  }
+}
+
+.btn-primary2 {
+  @extend .btn-basic;
+  color: $color-dodger-blue;
+  background: $color-woodsmoke;
+}
+
+.btn-primary2:hover,
+.btn-primary2:active,
+.btn-primary2:focus {
+  color: $color-dodger-blue-btn-hover;
+}
+
+.btn-primary1 {
+  @extend .btn-basic;
+  color: $color-woodsmoke;
+  background: $color-dodger-blue;
+}
+
+.btn-primary1:hover,
+.btn-primary1:active,
+.btn-primary1:focus {
+  color: $color-woodsmoke;
+  background-color: $color-dodger-blue-btn-hover;
+}
+
+.btn-primary-save {
+  @extend .btn-basic;
+  color: $color-woodsmoke;
+  background: $color-mint-green;
+}
+
+.btn-primary-save:hover,
+.btn-primary-save:active,
+.btn-primary-save:focus {
+  color: $color-woodsmoke;
+  background-color: $color-mint-green-darker;
+}
+
+.btn-primary-delete {
+  @extend .btn-basic;
+  color: $color-primary-text-color;
+  background: $color-bitter-sweet;
+}
+
+.btn-primary-delete:hover,
+.btn-primary-delete:active,
+.btn-primary-delete:focus {
+  color: $color-primary-text-color;
+  background-color: $color-bitter-sweet-darker;
+}
+
+.btn-secondary-delete {
+  @extend .btn-basic;
+  color: $color-bitter-sweet;
+  background: transparent;
+}
+
+.btn-secondary-delete:hover,
+.btn-secondary-delete:active,
+.btn-secondary-delete:focus {
+  color: $color-bitter-sweet-darker;
+  background-color: transparent;
+}
+
+.btn-primary-coral {
+  @extend .btn-basic;
+  color: $color-woodsmoke;
+  background: $color-coral;
+}
+
+.btn-primary-coral:hover,
+.btn-primary-coral:active,
+.btn-primary-coral:focus {
+  color: $color-woodsmoke;
+  background-color: $color-coral-darker;
+}
+
+.btn-outline-primary1 {
+  color: $color-dodger-blue;
+  border: 1px solid $color-dodger-blue;
+  background-color: $color-woodsmoke;
+  @extend .btn-basic;
+}
+
+.btn-outline-primary1:hover,
+.btn-outline-primary1:active,
+.btn-outline-primary1:focus {
+  color: $color-woodsmoke;
+  background-color: $color-dodger-blue-btn-hover;
+}

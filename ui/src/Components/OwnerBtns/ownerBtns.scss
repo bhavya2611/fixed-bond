@@ -1,0 +1,150 @@
+@import "../../Styles/variables.scss";
+
+.header {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 0px 5px 5px black;
+}
+
+.headerItemLeft {
+  display: flex;
+  flex: 1;
+}
+
+.headerItemCenter {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.headerItemRight {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.identiconImg {
+  border-radius: 50%;
+  width: fit-content;
+  border: 3px solid $color-dodger-blue;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+}
+
+.metamaskLogo {
+  height: 30px;
+  margin-right: 5px;
+}
+
+.btns-div {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 99999999;
+}
+
+.connectBtn {
+  background: no-repeat;
+  color: $color-coral;
+  border: 1px solid $color-coral;
+  margin-right: 20px;
+  padding: 10px;
+}
+
+.networkSwitchDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+// Antd Toggle Switch
+
+.ant-switch-inner {
+  display: block;
+  margin: 0px 5px;
+  color: #fff;
+  font-size: 12px;
+  -webkit-transition: margin 0.2s;
+  transition: margin 0.2s;
+}
+
+.ant-switch-handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.ant-switch {
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum", "tnum";
+  position: relative;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 7rem;
+  height: 22px;
+  line-height: 22px;
+  vertical-align: middle;
+  background-color: $color-coral;
+  border: 0;
+  border-radius: 100px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  align-self: center;
+  margin-right: 20px;
+}
+
+.ant-switch-checked {
+  background-color: $color-dodger-blue;
+
+  .ant-switch-inner {
+    margin-right: 10px;
+  }
+}
+
+.ant-switch:focus {
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.ant-switch-handle::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  border-radius: 9px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+  box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  content: "";
+}
+
+.ant-switch-checked .ant-switch-handle {
+  left: calc(100% - 18px - 2px);
+}

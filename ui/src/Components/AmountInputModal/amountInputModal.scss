@@ -1,0 +1,52 @@
+@import "../../Styles/variables.scss";
+
+.modalBtn {
+  margin: 0px 20px;
+  margin-bottom: 20px;
+
+  > button > div > h6 {
+    margin: 0px;
+  }
+}
+
+.socardItemContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px 0px;
+  border-bottom: 1px solid $color-woodsmoke;
+
+  > div {
+    display: flex;
+    flex: 1;
+  }
+
+  div:nth-child(2) {
+    justify-content: center;
+  }
+
+  div:nth-child(3) {
+    justify-content: flex-end;
+  }
+}
+
+.justifyImp {
+  justify-content: flex-end !important;
+  font-size: 20px;
+}
+
+.borderNone {
+  border-bottom: none !important;
+}
+
+.stakedValue {
+  color: $color-dodger-blue;
+  margin-bottom: 0px;
+  font-size: 16px;
+}
+
+.balanceInfoDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

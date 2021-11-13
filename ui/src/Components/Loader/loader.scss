@@ -1,0 +1,16 @@
+@import "../../Styles/variables.scss";
+
+.loader-div {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  z-index: 99999999999;
+  background-color: #0000008f;
+  color: #2abfff;
+  top: 0px;
+  left: 0px;
+}

@@ -1,0 +1,33 @@
+@import "../../Styles/variables.scss";
+
+.noMargin {
+  margin-bottom: 0px;
+}
+
+.custommCard {
+  background-color: $color-woodsmoke;
+  border: 1px solid $color-dodger-blue;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 10px #17a2b82b;
+  min-width: 375px;
+}
+
+.subCardHeader {
+  display: flex;
+  flex: 1;
+}
+
+.btnsWrapper {
+  margin-top: 30px;
+
+  .customBtnParent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+
+    > div {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@import '../../Styles/variables.scss';
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+  align-items: center;
+  background: black;
+  border-radius: 10px;
+  text-align: center;
+  filter: drop-shadow(2px 4px 6px black);
+  background: radial-gradient(circle, black 0%, #0d0d0d 50%, black 100%);
+
+  > div {
+    > span {
+      margin: 20px 5px;
+      font-size: 12px;
+    }
+
+    > button {
+      background: none;
+      color: $color-mind-gray;
+      border: none;
+    }
+
+    > i {
+      color: $color-mind-gray;
+    }
+  }
+
+  > h5 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: $color-dodger-blue;
+    // text-decoration: underline;
+  }
+}
