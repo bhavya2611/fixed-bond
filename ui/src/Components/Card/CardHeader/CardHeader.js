@@ -1,24 +1,24 @@
 import React from 'react';
 import './cardheader.scss';
 
-const CardHeader = ({ apy }) => {
+const CardHeader = ({ bondInfo }) => {
   return (
     <div className='cardHeader'>
       <div className='cardHeaderContentLeft'>
         <h6 style={{ textAlign: 'end' }}>ROI (1M)</h6>
-        <p>{apy}%</p>
+        <p>{bondInfo.interestOneMonth ?? 0}%</p>
       </div>
       <div className='cardHeaderContentLeft'>
         <h6 style={{ textAlign: 'end' }}>ROI (3M)</h6>
-        <p>{apy}%</p>
+        <p>{bondInfo.interestThreeMonth ?? 0}%</p>
       </div>
       <div className='cardHeaderContentRightItems'>
         <h6 style={{ textAlign: 'end' }}>ROI (6M)</h6>
-        <p>{apy}%</p>
+        <p>{bondInfo.interestSixMonth ?? 0}%</p>
       </div>
       <div className='cardHeaderContentRightItems'>
         <h6 style={{ textAlign: 'end' }}>ROI (12M)</h6>
-        <p>{apy}%</p>
+        <p>{bondInfo.interestTwelveMonth ?? 0}%</p>
       </div>
     </div>
   );

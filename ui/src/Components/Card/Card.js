@@ -27,46 +27,23 @@ const Card = (props) => {
   const [showLoader, setShowLoader] = useState(false);
   const [flow, setFlow] = useState('');
   const [yourStake, setYourStake] = useState(0);
-  const [stackReward, setStackReward] = useState(0);
+  const [bondInfo, setBondInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({});
   const [lpTokenUserBalance, setLpTokenUserBalance] = useState(0);
   const [totalStakedVal, setTotalStakedVal] = useState(0);
-  const [apyValue, setApyValue] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [popupObj, setPopupObj] = useState({
     title: 'Success',
     message: '',
   });
 
-  const onClaim = async () => {
-    setShowLoader(true);
-    const claimResponse = await withdraw(web3Instance, '0', globalVariables);
-    if (claimResponse) {
-      await getUserInfoFn();
-      setIsActive(false);
-      setShowPopup(true);
-      setPopupObj({
-        title: 'Success',
-        message: <h6>Reward successfully claimed</h6>,
-      });
-    } else {
-      setIsActive(false);
-      setShowPopup(true);
-      setPopupObj({
-        title: 'Error',
-        message: <h6>Unable to Claim Rewards. Please try again.</h6>,
-      });
-    }
-    setShowLoader(false);
-  };
-
   const onExit = async () => {
     setShowLoader(true);
-    const withdrawResponse = await withdraw(
+    const withdrawResponse = await emergencyWithdraw(
       web3Instance,
-      Math.trunc(yourStake).toString(),
       globalVariables
     );
-    if (withdrawResponse) {
+    if (withdrawResponse && withdrawResponse.status) {
       await getUserInfoFn();
       setIsActive(false);
       setShowPopup(true);
@@ -85,12 +62,13 @@ const Card = (props) => {
     setShowLoader(false);
   };
 
-  const onDeposit = async (amount) => {
+  const onDeposit = async (amount, time) => {
     setShowLoader(true);
     const depositResponse = await depositToken(
       web3Instance,
+      globalVariables,
       amount,
-      globalVariables
+      time
     );
     if (depositResponse) {
       await getUserInfoFn();
@@ -111,27 +89,23 @@ const Card = (props) => {
     setShowLoader(false);
   };
 
-  const onWithdraw = async (amount) => {
+  const onWithdraw = async () => {
     setShowLoader(true);
-    const withdrawResponse = await withdraw(
-      web3Instance,
-      amount,
-      globalVariables
-    );
+    const withdrawResponse = await withdraw(web3Instance, globalVariables);
     if (withdrawResponse) {
       await getUserInfoFn();
       setIsActive(false);
       setShowPopup(true);
       setPopupObj({
         title: 'Success',
-        message: <h6>Withdrawn {amount} successfully</h6>,
+        message: <h6>Withdrawn successfully</h6>,
       });
     } else {
       setIsActive(false);
       setShowPopup(true);
       setPopupObj({
         title: 'Error',
-        message: <h6>Unable to Withdraw {amount}. Please try again.</h6>,
+        message: <h6>Unable to Withdraw. Please try again.</h6>,
       });
     }
     setShowLoader(false);
@@ -142,13 +116,8 @@ const Card = (props) => {
     setFlow('Deposit');
   };
 
-  const onClickWithdraw = () => {
-    setIsActive(true);
-    setFlow('Withdraw');
-  };
-
-  const onClickFn = (amount) => {
-    flow === 'Deposit' ? onDeposit(amount) : onWithdraw(amount);
+  const onClickFn = (amount, time) => {
+    flow === 'Deposit' ? onDeposit(amount, time) : onWithdraw();
   };
 
   const getUserInfoFn = async () => {
@@ -168,18 +137,28 @@ const Card = (props) => {
         if (rewardsInfo && !isNaN(Number(rewardsInfo))) {
           setRewardsInPool(rewardsInfo / 1000000000000000000);
         }
-        const rewardValues = await getPendingRewards(
+        const userRewardValue = await getPendingRewards(
           web3Instance,
           globalVariables
         );
-        setRewards(rewardValues);
+        setRewards(userRewardValue);
         const info = await getUserInfo(web3Instance, globalVariables);
         if (info && !isNaN(Number(info.amount))) {
           setYourStake(info.amount / 1000000000000000000);
         }
-        const apyResponse = 0;
-        if (!isNaN(Number(apyResponse))) {
-          setApyValue(apyResponse.toFixed(2));
+        const bondInfoResponse = await getBondInfo(
+          web3Instance,
+          globalVariables
+        );
+        if (bondInfoResponse) {
+          setBondInfo(bondInfoResponse);
+        }
+        const userInfoResponse = await getUserInfo(
+          web3Instance,
+          globalVariables
+        );
+        if (userInfoResponse) {
+          setUserInfo(userInfoResponse);
         }
       }
     } catch (e) {
@@ -197,14 +176,15 @@ const Card = (props) => {
   return (
     <div className='custommCard col-lg-4 col-md-6 col-sm-12'>
       <div className='subCardHeader'>
-        <CardHeader staked={Number(totalStakedVal)} apy={apyValue} />
+        <CardHeader staked={Number(totalStakedVal)} bondInfo={bondInfo} />
       </div>
       <div className='subCardBody'>
         <CardBody
+          bondInfo={bondInfo}
+          rewards={rewards}
           rewardsInPool={rewardsInPool}
-          userStake={yourStake}
+          userInfo={userInfo}
           NETWORK={globalVariables.NETWORK}
-          stackReward={stackReward}
         />
       </div>
       <div className='btnsWrapper'>
@@ -219,22 +199,14 @@ const Card = (props) => {
           </div>
           <div className='mb-10'>
             <CustomButton
-              onCLick={onClaim}
-              btnClass='primary1'
-              btnName='Claim'
-              btnText='Rewards'
-            />
-          </div>
-        </div>
-        <div className='customBtnParent'>
-          <div className='mr-10 mb-10'>
-            <CustomButton
-              onCLick={onClickWithdraw}
+              onCLick={onWithdraw}
               btnClass='primary1'
               btnName='Withdraw'
               btnText={`Token`}
             />
           </div>
+        </div>
+        <div className='customBtnParent'>
           <div className='mb-10'>
             <CustomButton
               onCLick={onExit}

@@ -1,5 +1,43 @@
 import { bondsContractABI, erc20TokenAbi } from './BondsContractConfig';
 
+export const setupBond = async (
+  web3Instance,
+  globalVariables,
+  bondCreateObj
+) => {
+  try {
+    const {
+      isActive,
+      minimumDeposit,
+      interestOneMonth,
+      interestSixMonth,
+      interestThreeMonth,
+      interestTwelveMonth,
+    } = bondCreateObj;
+    const bondsContractAddress = globalVariables.BONDS_CONTRACT_ADDRESS;
+    const BondsContract = new web3Instance.eth.Contract(
+      bondsContractABI,
+      bondsContractAddress
+    );
+    const response = await BondsContract.methods
+      .setupBond(
+        isActive,
+        interestOneMonth,
+        interestSixMonth,
+        interestThreeMonth,
+        interestTwelveMonth,
+        web3Instance.utils.toWei(web3Instance.utils.toBN(minimumDeposit))
+      )
+      .send({
+        from: window.ethereum.selectedAddress,
+      });
+    return response;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+
 export const getBondInfo = async (web3Instance, globalVariables) => {
   try {
     const bondsContractAddress = globalVariables.BONDS_CONTRACT_ADDRESS;
@@ -7,9 +45,9 @@ export const getBondInfo = async (web3Instance, globalVariables) => {
       bondsContractABI,
       bondsContractAddress
     );
-    const poolInfo = await BondsContract.methods.bondInfo().call();
-    console.log(poolInfo);
-    return poolInfo;
+    const bondInfo = await BondsContract.methods.bondInfo().call();
+    debugger;
+    return bondInfo;
   } catch (e) {
     console.log(e);
     return false;
@@ -63,8 +101,34 @@ export const depositToken = async (
     const amountToDeposit = web3Instance.utils.toWei(
       web3Instance.utils.toBN(amount)
     );
+
+    const tokenAddress = globalVariables.TOKEN_ADDRESS;
+    const TokenContract = new web3Instance.eth.Contract(
+      erc20TokenAbi,
+      tokenAddress
+    );
+
+    const currentAllowance = await TokenContract.methods
+      .allowance(
+        window.ethereum.selectedAddress,
+        globalVariables.BONDS_CONTRACT_ADDRESS
+      )
+      .call();
+    let approveResponse = {};
+
+    if (currentAllowance < Number(amountToDeposit.toString())) {
+      const approvalAmount = amount * 1000;
+      approveResponse = await approveSpend(
+        web3Instance,
+        web3Instance.utils.toWei(web3Instance.utils.toBN(approvalAmount)),
+        globalVariables
+      );
+    } else {
+      approveResponse.status = true;
+    }
+
     const depositResponse = await BondsContract.methods
-      .deposit(amountToDeposit, timeInMonths)
+      .deposit(amountToDeposit, Number(timeInMonths))
       .send({
         from: window.ethereum.selectedAddress,
       });
@@ -119,17 +183,17 @@ export const addRewards = async (web3Instance, globalVariables, amount) => {
       bondsContractAddress
     );
 
-    const stackTokenAddress = globalVariables.STACK_TOKEN_ADDRESS;
-    const StackTokenContract = new web3Instance.eth.Contract(
+    const tokenAddress = globalVariables.TOKEN_ADDRESS;
+    const TokenContract = new web3Instance.eth.Contract(
       erc20TokenAbi,
-      stackTokenAddress
+      tokenAddress
     );
 
     const amountToDeposit = web3Instance.utils.toWei(
       web3Instance.utils.toBN(amount)
     );
 
-    const currentAllowance = await StackTokenContract.methods
+    const currentAllowance = await TokenContract.methods
       .allowance(
         window.ethereum.selectedAddress,
         globalVariables.BONDS_CONTRACT_ADDRESS
@@ -186,12 +250,12 @@ export const getUserInfo = async (web3Instance, globalVariables) => {
 export const approveSpend = async (web3Instance, amount, globalVariables) => {
   try {
     const bondsContractAddress = globalVariables.BONDS_CONTRACT_ADDRESS;
-    const stackTokenAddress = globalVariables.STACK_TOKEN_ADDRESS;
-    const StackTokenContract = new web3Instance.eth.Contract(
+    const tokenAddress = globalVariables.TOKEN_ADDRESS;
+    const TokenContract = new web3Instance.eth.Contract(
       erc20TokenAbi,
-      stackTokenAddress
+      tokenAddress
     );
-    const approveSpend = await StackTokenContract.methods
+    const approveSpend = await TokenContract.methods
       .approve(bondsContractAddress, amount)
       .send({
         from: window.ethereum.selectedAddress,

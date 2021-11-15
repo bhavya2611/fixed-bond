@@ -186,7 +186,7 @@ const Header = (props) => {
         message={popupObj.message}
         closePopup={() => setShowPopup(false)}
       />
-      {props.showStakingButtons && <OwnerBtns />}
+      {props.showOwnerButtons && <OwnerBtns />}
     </div>
   );
 };

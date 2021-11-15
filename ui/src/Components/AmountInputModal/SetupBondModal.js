@@ -5,25 +5,23 @@ import './amountInputModal.scss';
 
 const SetupBondModal = (props) => {
   const showClass = props.isActive ? 'show' : '';
-  const [poolAddObject, setPoolAddObject] = useState({
-    allocPoint: 0,
-    lpTokenAddress: '',
-    update: false,
+  const [bondInfoObject, setBondInfoObject] = useState({
+    isActive: true,
+    minimumDeposit: 0,
+    interestOneMonth: 0,
+    interestThreeMonth: 0,
+    interestSixMonth: 0,
+    interestTwelveMonth: 0,
   });
 
   const onClick = () => {
-    props.onClick(poolAddObject);
+    props.onClick(bondInfoObject);
   };
 
   const setValue = (value, prop) => {
-    const poolAddObjectNew = { ...poolAddObject };
-    if (prop === 'update') {
-      if (value === 'true') poolAddObjectNew[prop] = true;
-      else poolAddObjectNew[prop] = false;
-    } else {
-      poolAddObjectNew[prop] = value;
-    }
-    setPoolAddObject(poolAddObjectNew);
+    const bondInfoObjectNew = { ...bondInfoObject };
+    bondInfoObjectNew[prop] = value;
+    setBondInfoObject(bondInfoObjectNew);
   };
 
   return (
@@ -58,36 +56,36 @@ const SetupBondModal = (props) => {
               <div className='form-group'>
                 <div className='balanceInfoDiv'>
                   <label className='somodal1__label'>
-                    Alloc Point <span className='colorBitterSweet'>*</span>
+                    Is Active <span className='colorBitterSweet'>*</span>
                   </label>
                 </div>
                 <div className='inputGroup'>
-                  <input
-                    type='number'
-                    min={0}
+                  <select
                     className='form-control'
-                    placeholder={`Enter alloc points ...`}
-                    value={poolAddObject.allocPoint}
+                    value={bondInfoObject.isActive}
                     onChange={(event) =>
-                      setValue(event.target.value, 'allocPoint')
+                      setValue(event.target.value, 'isActive')
                     }
-                  />
+                  >
+                    <option value={true}>Active</option>
+                    <option value={false}>Inactive</option>
+                  </select>
                 </div>
               </div>
               <div className='form-group'>
                 <div className='balanceInfoDiv'>
                   <label className='somodal1__label'>
-                    LP Token Address <span className='colorBitterSweet'>*</span>
+                    Minmum Deposit <span className='colorBitterSweet'>*</span>
                   </label>
                 </div>
                 <div className='inputGroup'>
                   <input
                     type='text'
                     className='form-control'
-                    placeholder={`Enter lp token address ...`}
-                    value={poolAddObject.lpTokenAddress}
+                    placeholder={`Enter amount ...`}
+                    value={bondInfoObject.minimumDeposit}
                     onChange={(event) =>
-                      setValue(event.target.value, 'lpTokenAddress')
+                      setValue(event.target.value, 'minimumDeposit')
                     }
                   />
                 </div>
@@ -95,7 +93,7 @@ const SetupBondModal = (props) => {
               <div className='form-group'>
                 <div className='balanceInfoDiv'>
                   <label className='somodal1__label'>
-                    Mass Update Pools{' '}
+                    Interest for One Month{' '}
                     <span className='colorBitterSweet'>*</span>
                   </label>
                 </div>
@@ -103,9 +101,68 @@ const SetupBondModal = (props) => {
                   <input
                     type='text'
                     className='form-control'
-                    placeholder={`Mass Update pools ...`}
-                    value={poolAddObject.update}
-                    onChange={(event) => setValue(event.target.value, '')}
+                    placeholder={`Enter pecentage ...`}
+                    value={bondInfoObject.interestOneMonth}
+                    onChange={(event) =>
+                      setValue(event.target.value, 'interestOneMonth')
+                    }
+                  />
+                </div>
+              </div>
+              <div className='form-group'>
+                <div className='balanceInfoDiv'>
+                  <label className='somodal1__label'>
+                    Interest for Three Month{' '}
+                    <span className='colorBitterSweet'>*</span>
+                  </label>
+                </div>
+                <div className='inputGroup'>
+                  <input
+                    type='text'
+                    className='form-control'
+                    placeholder={`Enter pecentage ...`}
+                    value={bondInfoObject.interestThreeMonth}
+                    onChange={(event) =>
+                      setValue(event.target.value, 'interestThreeMonth')
+                    }
+                  />
+                </div>
+              </div>
+              <div className='form-group'>
+                <div className='balanceInfoDiv'>
+                  <label className='somodal1__label'>
+                    Interest for Six Month{' '}
+                    <span className='colorBitterSweet'>*</span>
+                  </label>
+                </div>
+                <div className='inputGroup'>
+                  <input
+                    type='text'
+                    className='form-control'
+                    placeholder={`Enter pecentage ...`}
+                    value={bondInfoObject.interestSixMonth}
+                    onChange={(event) =>
+                      setValue(event.target.value, 'interestSixMonth')
+                    }
+                  />
+                </div>
+              </div>
+              <div className='form-group'>
+                <div className='balanceInfoDiv'>
+                  <label className='somodal1__label'>
+                    Interest for Twelve Month{' '}
+                    <span className='colorBitterSweet'>*</span>
+                  </label>
+                </div>
+                <div className='inputGroup'>
+                  <input
+                    type='text'
+                    className='form-control'
+                    placeholder={`Enter pecentage ...`}
+                    value={bondInfoObject.interestTwelveMonth}
+                    onChange={(event) =>
+                      setValue(event.target.value, 'interestTwelveMonth')
+                    }
                   />
                 </div>
               </div>
@@ -117,7 +174,7 @@ const SetupBondModal = (props) => {
                 <CustomButton
                   onCLick={onClick}
                   btnClass='primary1'
-                  btnName='Add Pool'
+                  btnName='Setup Bond'
                 />
               </div>
             </div>

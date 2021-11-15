@@ -3,6 +3,7 @@ import { Web3Context } from '../../Context/Web3Context';
 import {
   addRewards,
   getBondInfo,
+  setupBond,
 } from '../../Utils/SmartContractUtils/BondsContractFunctions';
 import { GlobalVariablesContext } from '../../Context/GlobalVariablesContext';
 import PopupComponent from '../Popup/PopupComponent';
@@ -23,25 +24,25 @@ const OwnerBtns = () => {
   const [web3Instance] = useContext(Web3Context);
   const [globalVariables] = useContext(GlobalVariablesContext);
 
-  const addPool = async (poolAddObject) => {
+  const setupBondFn = async (bondInfoObject) => {
     if (isActive) {
       setShowLoader(true);
-      // const response = await addLPTokenToFarm(
-      //   web3Instance,
-      //   globalVariables,
-      //   poolAddObject
-      // );
+      const response = await setupBond(
+        web3Instance,
+        globalVariables,
+        bondInfoObject
+      );
       setIsActive(false);
       setShowPopup(true);
-      if (true) {
+      if (response && response.status) {
         setPopupObj({
           title: 'Success',
-          message: <h6>Pool successfully added</h6>,
+          message: <h6>Bond setup done successfully</h6>,
         });
       } else {
         setPopupObj({
           title: 'Error',
-          message: <h6>Unable to add pool. Please try again.</h6>,
+          message: <h6>Unable to setup bond. Please try again.</h6>,
         });
       }
       setShowLoader(false);
@@ -93,8 +94,8 @@ const OwnerBtns = () => {
       window.ethereum.selectedAddress?.toString().toLowerCase() ===
         globalVariables.OWNER_ADDRESS?.toString().toLowerCase() ? (
         <div className='btns-div'>
-          <button onClick={addPool} className='connectBtn'>
-            Add Pool
+          <button onClick={setupBondFn} className='connectBtn'>
+            Setup Bond
           </button>
           <button onClick={addRewardsFn} className='connectBtn'>
             Add Rewards
@@ -111,7 +112,7 @@ const OwnerBtns = () => {
         closePopup={() => setShowPopup(false)}
       />
       <SetupBondModal
-        onClick={addPool}
+        onClick={setupBondFn}
         isActive={isActive}
         closeModal={() => setIsActive(false)}
       />

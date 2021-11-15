@@ -10,7 +10,7 @@ const Home = () => {
       <div style={{ width: '100%' }}>
         <Header
           setRetriggerFlow={() => setRetriggerFlow(!retriggerFlow)}
-          showStakingButtons={true}
+          showOwnerButtons={true}
         />
         <div className='pageLayout'>
           <div className='mainCard'>
