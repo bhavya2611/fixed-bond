@@ -33,13 +33,8 @@ module.exports = {
     hardhat: {
       initialBaseFeePerGas: 0, // workaround from https://github.com/sc-forks/solidity-coverage/issues/652#issuecomment-896330136 . Remove when that issue is closed.
     },
-    maticTestnet: {
-      url: process.env.MATIC_TESTNET_URL || '',
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-    },
-    matic: {
-      url: process.env.MATIC_URL || '',
+    kovan: {
+      url: process.env.TESTNET_URL || '',
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
@@ -49,6 +44,6 @@ module.exports = {
     currency: 'USD',
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY_MATIC,
+    apiKey: process.env.ETHERSCAN_API_KEY,
   },
 };

@@ -15,11 +15,11 @@ async function main() {
   // manually to make sure everything is compiled
   // await hre.run('compile');
 
-  let NAME = 'Vest';
-  let SYMBOL = 'VEST';
+  let NAME = 'Tok';
+  let SYMBOL = 'TOK';
   let SUPPLY = ethers.utils.parseEther('10000000000000');
 
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^ DEPLOYMENT VEST TOKEN ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  //^^^^^^^^^^^^^^^^^^^^^^^^^^ DEPLOYMENT TOKEN ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   /**
    * Params
@@ -29,12 +29,12 @@ async function main() {
    */
 
   // We get the contract to deploy
-  const VestToken = await ethers.getContractFactory('ERC20Token');
-  vestToken = await VestToken.deploy(NAME, SYMBOL, SUPPLY);
+  const Token = await ethers.getContractFactory('ERC20Token');
+  token = await Token.deploy(NAME, SYMBOL, SUPPLY);
 
-  await vestToken.deployed();
+  await token.deployed();
 
-  console.log('Vesting Token deployed to:', vestToken.address);
+  console.log('Token deployed to:', token.address);
 
   // vvvvvvvvvvvvvvvvvvvvvvvvv VERIFICATION vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
   console.log('Wait for contract!');
@@ -42,35 +42,25 @@ async function main() {
   console.log('Waited 46s');
 
   await hre.run('verify:verify', {
-    address: vestToken.address,
+    address: token.address,
     constructorArguments: [NAME, SYMBOL, SUPPLY],
   });
 
-  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ DEPLOYMENT VESTING CONTRACT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ DEPLOYMENT FIXED BOND CONTRACT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  let STABLE_TOKEN_ADDRESS;
-
-  if (hre.network.name === 'maticTestnet')
-    STABLE_TOKEN_ADDRESS = '0xe07d7b44d340216723ed5ea33c724908b817ee9d';
-  else if (hre.network.name === 'matic')
-    STABLE_TOKEN_ADDRESS = '0xe07d7b44d340216723ed5ea33c724908b817ee9d';
   /**
    * Params
-   * Address - Stable Token
-   * Address - Vest Token
+   * Address - Token
    */
 
   // We get the contract to deploy
-  const VestingContract = await ethers.getContractFactory('Vesting');
+  const FixedBond = await ethers.getContractFactory('FixedBond');
 
-  vestingContract = await VestingContract.deploy(
-    STABLE_TOKEN_ADDRESS,
-    vestToken.address
-  );
+  fixedBond = await FixedBond.deploy(token.address);
 
-  await vestingContract.deployed();
+  await fixedBond.deployed();
 
-  console.log('Vesting Contract deployed to:', vestingContract.address);
+  console.log('Fixed Bond Contract deployed to:', fixedBond.address);
 
   // vvvvvvvvvvvvvvvvvvvvvvvvv VERIFICATION vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
   console.log('Wait for contract!');
@@ -78,8 +68,8 @@ async function main() {
   console.log('Waited 46s');
 
   await hre.run('verify:verify', {
-    address: vestingContract.address,
-    constructorArguments: [STABLE_TOKEN_ADDRESS, VEST_TOKEN_ADDRESS],
+    address: fixedBond.address,
+    constructorArguments: [token.address],
   });
 }
 

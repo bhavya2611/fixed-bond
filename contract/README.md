@@ -1,7 +1,6 @@
-# TOKEN DEPLOYED
+# CONTRACT DEPLOYED
 
-<a href="https://polygonscan.com/address/0x76BE864699447062F0dCca614871cE4308890234#code">https://polygonscan.com/address/0x76BE864699447062F0dCca614871cE4308890234#code</a>
-<a href="https://rinkeby.etherscan.io/address/0x8A33585619508993FD92664ed8B2c0cb6316069c#code">https://rinkeby.etherscan.io/address/0x8A33585619508993FD92664ed8B2c0cb6316069c#code</a>
+<a href="https://kovan.etherscan.io/address/0x7486adbcB0d1779916928dd52d0815AF4f118825#code">https://kovan.etherscan.io/address/0x7486adbcB0d1779916928dd52d0815AF4f118825#code</a>
 
 # INSTALL DEPENDENCIES
 
@@ -36,29 +35,9 @@ To get the Etherscan and Polygonscan API key, go to
 # DEPLOY ON TESTNET
 
 ```shell
-npx hardhat run --network rinkeby scripts/deploy.js
+npx hardhat run --network kovan scripts/deploy.js
 ```
 
-# DEPLOY ON MATIC
+# TOKEN ADDRESS
 
-```shell
-npx hardhat run --network matic scripts/deploy.js
-```
-
-# VERIFICATION
-
-```shell
-hardhat run --network ropsten scripts/deploy.js
-```
-
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
-
-```shell
-npx hardhat verify --network rinkeby DEPLOYED_CONTRACT_ADDRESS "Name", "Symbol", "10", "www.link.com/"
-```
-
-When verifying the contract on Matic, change hardhat.config.js "ETHERSCAN_API_KEY" to "ETHERSCAN_API_KEY_MATIC"
-
-```shell
-npx hardhat verify --network matic DEPLOYED_CONTRACT_ADDRESS "Name", "Symbol", "10", "www.link.com/"
-```
+0xDdf7f8858E6b817C744A1AB78ed7aeE40368BC76
