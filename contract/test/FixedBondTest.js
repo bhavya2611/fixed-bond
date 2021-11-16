@@ -7,7 +7,6 @@ const { solidity } = require('ethereum-waffle');
 use(solidity);
 
 const SecondsInMonth = 86400 * 30;
-const TimeNow = Math.floor(Date.now() / 1000);
 
 describe('Fixed Bond Contract', function () {
   it('Defining Generals', async function () {
