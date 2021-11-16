@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 import { Web3Context } from '../../Context/Web3Context';
 import {
   addRewards,
-  getBondInfo,
   setupBond,
+  updateBond,
 } from '../../Utils/SmartContractUtils/BondsContractFunctions';
 import { GlobalVariablesContext } from '../../Context/GlobalVariablesContext';
 import PopupComponent from '../Popup/PopupComponent';
@@ -23,6 +23,31 @@ const OwnerBtns = () => {
   });
   const [web3Instance] = useContext(Web3Context);
   const [globalVariables] = useContext(GlobalVariablesContext);
+
+  const updateBondFn = async (bondInfoObject) => {
+    if (isActive) {
+      setShowLoader(true);
+      const response = await updateBond(
+        web3Instance,
+        globalVariables,
+        bondInfoObject
+      );
+      setIsActive(false);
+      setShowPopup(true);
+      if (response && response.status) {
+        setPopupObj({
+          title: 'Success',
+          message: <h6>Bond setup done successfully</h6>,
+        });
+      } else {
+        setPopupObj({
+          title: 'Error',
+          message: <h6>Unable to setup bond. Please try again.</h6>,
+        });
+      }
+      setShowLoader(false);
+    } else setIsActive(true);
+  };
 
   const setupBondFn = async (bondInfoObject) => {
     if (isActive) {
@@ -70,24 +95,6 @@ const OwnerBtns = () => {
     } else setShowRewardsModal(true);
   };
 
-  const getBondInformation = async () => {
-    setShowLoader(true);
-    const response = await getBondInfo(web3Instance, globalVariables);
-    setShowPopup(true);
-    if (response) {
-      setPopupObj({
-        title: 'Success',
-        message: <h6>You can view the pool info in the console</h6>,
-      });
-    } else {
-      setPopupObj({
-        title: 'Error',
-        message: <h6>Unable to get pool info. Please try again.</h6>,
-      });
-    }
-    setShowLoader(false);
-  };
-
   return (
     <div>
       {window?.ethereum?.selectedAddress &&
@@ -97,11 +104,11 @@ const OwnerBtns = () => {
           <button onClick={setupBondFn} className='connectBtn'>
             Setup Bond
           </button>
+          <button onClick={updateBondFn} className='connectBtn'>
+            Update Bond
+          </button>
           <button onClick={addRewardsFn} className='connectBtn'>
             Add Rewards
-          </button>
-          <button onClick={getBondInformation} className='connectBtn'>
-            Bond Info
           </button>
         </div>
       ) : null}
@@ -116,8 +123,14 @@ const OwnerBtns = () => {
         isActive={isActive}
         closeModal={() => setIsActive(false)}
       />
+      <SetupBondModal
+        onClick={updateBondFn}
+        isActive={isActive}
+        isUpdate={true}
+        closeModal={() => setIsActive(false)}
+      />
       <AddRewardsModal
-        onClick={addRewards}
+        onClick={(amount) => addRewards(web3Instance, globalVariables, amount)}
         isActive={showRewardsModal}
         closeModal={() => setShowRewardsModal(false)}
       />

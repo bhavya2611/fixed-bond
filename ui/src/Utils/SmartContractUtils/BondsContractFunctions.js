@@ -1,5 +1,32 @@
 import { bondsContractABI, erc20TokenAbi } from './BondsContractConfig';
 
+export const updateBond = async (
+  web3Instance,
+  globalVariables,
+  bondCreateObj
+) => {
+  try {
+    const { isActive, minimumDeposit } = bondCreateObj;
+    const bondsContractAddress = globalVariables.BONDS_CONTRACT_ADDRESS;
+    const BondsContract = new web3Instance.eth.Contract(
+      bondsContractABI,
+      bondsContractAddress
+    );
+    const response = await BondsContract.methods
+      .updateBond(
+        isActive,
+        web3Instance.utils.toWei(web3Instance.utils.toBN(minimumDeposit))
+      )
+      .send({
+        from: window.ethereum.selectedAddress,
+      });
+    return response;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+};
+
 export const setupBond = async (
   web3Instance,
   globalVariables,
@@ -46,7 +73,6 @@ export const getBondInfo = async (web3Instance, globalVariables) => {
       bondsContractAddress
     );
     const bondInfo = await BondsContract.methods.bondInfo().call();
-    debugger;
     return bondInfo;
   } catch (e) {
     console.log(e);
@@ -78,7 +104,7 @@ export const getRewardsBalance = async (web3Instance, globalVariables) => {
       bondsContractABI,
       bondsContractAddress
     );
-    const rewardsBalance = await BondsContract.methods.rewardBalance().call();
+    const rewardsBalance = await BondsContract.methods.rewardsBalance().call();
     return rewardsBalance;
   } catch (e) {
     console.log(e);
