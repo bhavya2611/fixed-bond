@@ -1,6 +1,10 @@
-# CONTRACT DEPLOYED
+# FIXED BOND CONTRACT DEPLOYED
 
-<a href="https://kovan.etherscan.io/address/0x7486adbcB0d1779916928dd52d0815AF4f118825#code">https://kovan.etherscan.io/address/0x7486adbcB0d1779916928dd52d0815AF4f118825#code</a>
+<a href="https://kovan.etherscan.io/address/0x0A7573D32dE7fA1c14507656202B2Cf92CF72f18#code">https://kovan.etherscan.io/address/0x0A7573D32dE7fA1c14507656202B2Cf92CF72f18#code</a>
+
+# TOKEN CONTRACT DEPLOYED
+
+<a href="https://kovan.etherscan.io/address/0xDdf7f8858E6b817C744A1AB78ed7aeE40368BC76">https://kovan.etherscan.io/address/0xDdf7f8858E6b817C744A1AB78ed7aeE40368BC76</a>
 
 # INSTALL DEPENDENCIES
 
@@ -27,17 +31,11 @@ In this project, copy the .env.template file to a file named .env, and then edit
 Adjust the contract deployment settings!
 <b>scripts/deploy.js</b>
 
-To get the Etherscan and Polygonscan API key, go to
+To get the Etherscan API key, go to
 <a href="https://etherscan.io/myapikey"> https://etherscan.io/myapikey</a>
-<br>
-<a href="https://polygonscan.com/myapikey">https://polygonscan.com/myapikey</a>
 
 # DEPLOY ON TESTNET
 
 ```shell
 npx hardhat run --network kovan scripts/deploy.js
 ```
-
-# TOKEN ADDRESS
-
-0xDdf7f8858E6b817C744A1AB78ed7aeE40368BC76

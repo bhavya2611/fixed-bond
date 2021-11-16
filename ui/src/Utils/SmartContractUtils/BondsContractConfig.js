@@ -269,6 +269,24 @@ export const bondsContractABI = [
   {
     inputs: [
       {
+        internalType: 'bool',
+        name: '_isActive',
+        type: 'bool',
+      },
+      {
+        internalType: 'uint256',
+        name: '_minimumDeposit',
+        type: 'uint256',
+      },
+    ],
+    name: 'updateBond',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'address',
         name: '',
         type: 'address',
