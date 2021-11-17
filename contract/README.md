@@ -1,10 +1,10 @@
 # FIXED BOND CONTRACT DEPLOYED
 
-<a href="https://kovan.etherscan.io/address/0x0A7573D32dE7fA1c14507656202B2Cf92CF72f18#code">https://kovan.etherscan.io/address/0x0A7573D32dE7fA1c14507656202B2Cf92CF72f18#code</a>
+<a href="https://kovan.etherscan.io/address/0x29E07d47AEBD4da5F4d21aBDe50D672C4923F662#code">https://kovan.etherscan.io/address/0x29E07d47AEBD4da5F4d21aBDe50D672C4923F662#code</a>
 
 # TOKEN CONTRACT DEPLOYED
 
-<a href="https://kovan.etherscan.io/address/0xDdf7f8858E6b817C744A1AB78ed7aeE40368BC76">https://kovan.etherscan.io/address/0xDdf7f8858E6b817C744A1AB78ed7aeE40368BC76</a>
+<a href="https://kovan.etherscan.io/address/0x031BB2a1c7Ba20dE89b1D149C9faf1e52d084565#code">https://kovan.etherscan.io/address/0x031BB2a1c7Ba20dE89b1D149C9faf1e52d084565#code</a>
 
 # INSTALL DEPENDENCIES
 
