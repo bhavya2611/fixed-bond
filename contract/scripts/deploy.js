@@ -36,16 +36,6 @@ async function main() {
 
   console.log('Token deployed to:', token.address);
 
-  // vvvvvvvvvvvvvvvvvvvvvvvvv VERIFICATION vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-  console.log('Wait for contract!');
-  await delay(46000);
-  console.log('Waited 46s');
-
-  await hre.run('verify:verify', {
-    address: token.address,
-    constructorArguments: [NAME, SYMBOL, SUPPLY],
-  });
-
   //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ DEPLOYMENT FIXED BOND CONTRACT ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   /**
@@ -63,14 +53,15 @@ async function main() {
   console.log('Fixed Bond Contract deployed to:', fixedBond.address);
 
   // vvvvvvvvvvvvvvvvvvvvvvvvv VERIFICATION vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-  console.log('Wait for contract!');
-  await delay(46000);
-  console.log('Waited 46s');
 
-  await hre.run('verify:verify', {
-    address: fixedBond.address,
-    constructorArguments: [token.address],
-  });
+  // await hre.run('verify:verify', {
+  //   address: token.address,
+  //   constructorArguments: [NAME, SYMBOL, SUPPLY],
+  // });
+  // await hre.run('verify:verify', {
+  //   address: fixedBond.address,
+  //   constructorArguments: [token.address],
+  // });
 }
 
 // We recommend this pattern to be able to use async/await everywhere
