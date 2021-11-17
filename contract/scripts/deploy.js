@@ -54,6 +54,9 @@ async function main() {
 
   // vvvvvvvvvvvvvvvvvvvvvvvvv VERIFICATION vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
+  // Deploy the contract first then pick up the addresses, replace them below and then run the script again
+  // Conmment the part above which is for deploy while verifying
+
   // await hre.run('verify:verify', {
   //   address: token.address,
   //   constructorArguments: [NAME, SYMBOL, SUPPLY],
